@@ -48,7 +48,7 @@ const Hero = ({ courses }) => {
                       inputProps={{ 'aria-labelledby': labelId }}
                     />
                   </ListItemIcon>
-                  <ListItemText id={labelId} primary={`${value.title}`} />
+                  <ListItemText id={labelId} primary={`${value.code} ${value.title}`} />
                 </ListItemButton>
               </ListItem>
             );
