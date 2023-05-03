@@ -5,22 +5,48 @@ import { Navbar, Hero, Selector } from './components';
 
 function App() {
   const [degree, setDegree] = useState("bachelor");
+  const [bachelorSpec, setBachelorSpec] = useState("software");
+  const [masterSpec, setMasterSpec] = useState("software");
   const [courses, setCourses] = useState([]);
+  
   useEffect(() => {
-    if (degree === "bachelor") {
-      fetchFromAPI(`categories/1`)
-      .then(data => setCourses(data.this_courses));
+    if (degree === "bachelor"){
+      if (bachelorSpec === "software") {
+        fetchFromAPI(`categories/10`)
+        .then(data => setCourses(data.this_courses));
+      } else if (bachelorSpec === "network") {
+        fetchFromAPI(`categories/8`)
+        .then(data => setCourses(data.this_courses));
+      }
     } else {
-      fetchFromAPI(`categories/3`)
-      .then(data => setCourses(data.this_courses));
+      if (masterSpec === "software") {
+        fetchFromAPI(`categories/20`)
+        .then(data => setCourses(data.this_courses));
+      } else if (masterSpec === "network") {
+        fetchFromAPI(`categories/6`)
+        .then(data => setCourses(data.this_courses));
+      } else if (masterSpec === "cyber") {
+        fetchFromAPI(`categories/18`)
+        .then(data => setCourses(data.this_courses));
+      } else if (masterSpec === "data") {
+        fetchFromAPI(`categories/19`)
+        .then(data => setCourses(data.this_courses));
+      }
     }
-  }, [degree]);
+  }, [bachelorSpec, masterSpec, degree]);
 
-  console.log(degree);
+  // console.log(degree);
   return (
     <>
       <Navbar />
-      <Selector setDegree={setDegree}/>
+      <Selector 
+        degree={degree} 
+        setDegree={setDegree}
+        bachelorSpec={bachelorSpec}
+        setBachelorSpec={setBachelorSpec}
+        masterSpec={masterSpec}
+        setMasterSpec={setMasterSpec}
+      />
       <Hero courses={courses}/>
     </>
   )
