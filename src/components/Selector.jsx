@@ -1,17 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NativeSelect } from '@mui/material';
 
 const Selector = ({ setDegree, degree, setBachelorSpec, setMasterSpec, bachelorSpec, masterSpec }) => {
-  // const [combolist, setCombolist] = useState([
-  //   {
-  //     name: 'software',
-  //     title: "Software Engineering",
-  //   },
-  //   {
-  //     name: 'network',
-  //     title: "Computer Networking",
-  //   }
-  // ])
+  const [combolist, setCombolist] = useState([
+    {
+      name: 'software',
+      title: "Software Engineering",
+    },
+    {
+      name: 'network',
+      title: "Computer Networking",
+    }
+  ])
+
+  useEffect(() => {
+    if (degree === "master")
+    {
+      setCombolist([
+        {
+          name: 'software',
+          title: "Software Engineering",
+        },
+        {
+          name: 'network',
+          title: "Computer Networking",
+        },
+        {
+          name: 'cyber',
+          title: "Cyber Security",
+        },
+        {
+          name: 'data',
+          title: "Data Analytics",
+        }
+      ]);
+    } else {
+      setCombolist([
+        {
+          name: 'software',
+          title: "Software Engineering",
+        },
+        {
+          name: 'network',
+          title: "Computer Networking",
+        }
+      ]);
+    }
+  }, [degree]);
 
   return (
     <div>
@@ -26,52 +61,28 @@ const Selector = ({ setDegree, degree, setBachelorSpec, setMasterSpec, bachelorS
         <option value="bachelor">Bachelor Degree Courses</option>
         <option value="master">Master Degree Courses</option>
       </NativeSelect>
-      { degree === "bachelor" ? 
-        // <NativeSelect
-        //   sx={{ pl: '15px' }}
-        //   defaultValue={bachelorSpec}
-        //   inputProps={{
-        //     name: 'courses',
-        //     id: 'bachelor-select',
-        //   }}
-        //   onChange={(e) => setBachelorSpec(e.target.value)}
-        // >
-        //   {combolist.map((listItem) => (
-        //     <option key={listItem.name} value={listItem.name}>
-        //       {listItem.title}
-        //     </option>
-        //   ))}
-        // </NativeSelect>
-        <NativeSelect
+      <NativeSelect
           sx={{ pl: '15px' }}
-          defaultValue={bachelorSpec}
+          defaultValue={"some"}
           inputProps={{
             name: 'courses',
             id: 'bachelor-select',
           }}
-          onChange={(e) => setBachelorSpec(e.target.value)}
+          onChange={(e) => {
+            if (degree === "master") {
+              setMasterSpec(e.target.value);
+            } else {
+              setBachelorSpec(e.target.value);
+            }
+          }}
         >
-          <option value="software">Software Engineering</option>
-          <option value="network">Computer Networking</option>
+          {combolist.map((listItem) => (
+              <option key={listItem.name} value={listItem.name}>
+                {listItem.title}
+              </option>
+            )
+          )}
         </NativeSelect>
-      : 
-        <NativeSelect
-        sx={{ pl: '15px' }}
-        defaultValue={masterSpec}
-        inputProps={{
-          name: 'courses',
-          id: 'master-select',
-        }}
-        onChange={(e) => {
-          setMasterSpec(e.target.value);
-        }}
-      >
-        <option value="software">Software Engineering</option>
-        <option value="network">Computer Networking</option>
-        <option value="cyber">Cyber Security</option>
-        <option value="data">Data Analytics</option>
-      </NativeSelect>
-      }
     </div>
   )
 }
