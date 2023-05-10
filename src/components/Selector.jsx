@@ -69,12 +69,13 @@ const Selector = ({ setDegree, degree, setBachelorSpec, setMasterSpec, bachelorS
             id: 'bachelor-select',
           }}
           onChange={(e) => {
-            if (degree === "master") {
-              setMasterSpec(e.target.value);
-            } else {
-              setBachelorSpec(e.target.value);
-            }
-          }}
+              if (degree === "master") {
+                console.log(e);
+                setMasterSpec(e.target.value);
+              } else {
+                setBachelorSpec(e.target.value);
+              }
+            }}
         >
           {combolist.map((listItem) => (
               <option key={listItem.name} value={listItem.name}>
