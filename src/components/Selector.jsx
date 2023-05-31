@@ -63,7 +63,7 @@ const Selector = ({ setDegree, degree, setBachelorSpec, setMasterSpec, bachelorS
       </NativeSelect>
       <NativeSelect
           sx={{ pl: '15px' }}
-          defaultValue={"some"}
+          defaultValue='other'
           inputProps={{
             name: 'courses',
             id: 'bachelor-select',
@@ -77,6 +77,7 @@ const Selector = ({ setDegree, degree, setBachelorSpec, setMasterSpec, bachelorS
               }
             }}
         >
+          <option value='other' className='bg-white'>Select Concentration</option>
           {combolist.map((listItem) => (
               <option key={listItem.name} value={listItem.name}>
                 {listItem.title}
